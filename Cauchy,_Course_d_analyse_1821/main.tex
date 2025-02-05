@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math Book Template in LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,oneside]{book}  
+% The 'book' document class is ideal for longer works with chapters.
+% The options '11pt' sets the font size, and 'oneside' is for printing on one side.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble: Packages and Customizations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}    % Allows UTF-8 encoded characters.
+\usepackage[T1]{fontenc}       % Use modern font encoding.
+\usepackage{lmodern}           % Use Latin Modern fonts.
+
+% AMS packages for enhanced math typesetting:
+\usepackage{amsmath, amssymb, amsthm}  
+
+% For including graphics:
+\usepackage{graphicx}
+
+% For hyperlinks in the document:
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,     % Color for internal links
+    citecolor=blue,     % Color for bibliographic citations
+    urlcolor=blue       % Color for URLs
+}
+
+% Cleveref provides intelligent cross-referencing:
+\usepackage{cleveref}
+
+% Geometry allows you to set margins and page dimensions:
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% For color definitions:
+\usepackage{xcolor}
+
+% Fancyhdr for header and footer customization:
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[LE,RO]{\thepage}         % Page number on left even pages and right odd pages
+\fancyhead[LO]{\rightmark}          % Section title on left odd pages
+\fancyhead[RE]{\leftmark}           % Chapter title on right even pages
+
+% Microtype improves the overall appearance of the text:
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theorem Environments and Custom Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define theorem-like environments. The numbering is tied to chapters.
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}       % Shares numbering with theorem
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+% For definitions and examples, we switch to a different style:
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+% \newtheorem{corollary}[theorem]{Corollary}
+
+% For remarks:
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Some common math shortcuts:
+\newcommand{\R}{\mathbb{R}}  % The set of real numbers
+\newcommand{\N}{\mathbb{N}}  % The set of natural numbers
+\newcommand{\Z}{\mathbb{Z}}  % The set of integers
+
+% definition of new theorem-environments
+% \newtheorem{t1}{Definition}
+% \newtheorem{t2}[t1]{Theorem}
+% \newcommand{t3}[t1]{Corollary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title and Author Information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Cauchy, \textit{Course d'analyse} (1821)}
+\author{Mattep Bianchetti}
+\date{\today}  % Uses the current date; change as needed.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document Body
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Front Matter: title page, dedication, preface, table of contents, etc.
+\frontmatter
+\maketitle
+
+\tableofcontents
+
+% Main Matter: Chapters with the main content
+\mainmatter
+
+\chapter*{Preface}
+I solve some exercises and prove some statements taken from Cauchy's Course d'analyse (1821).
+
+\section*{Notation}
+\begin{enumerate}
+    \item $\bigwedge S$ is the least element in the set $S$ (which I assume to be non-empty and strictly ordered).
+    \item $\bigvee S$ is the greatest element in the set $S$ (which I assume to be non-empty and strictly ordered).
+\end{enumerate}
+ 
+\chapter{Pr\`{e}liminaries}
+In the chapter \textit{Pr\`{e}liminaries}, Cauchy discusses the general notion of quantity. He states the following definition and two propositions:
+
+\bigskip
+
+\begin{definition}
+    Let $n\in \N$. Given a list of real numbers\footnote{
+    ~Cauchy speaks of ``quantities'' (\textit{quantit\'{e}}). I do not claim that Cauchy's quantities coincides exactly with the real numbers.
+    }
+    $a_1,\ a_2,\ \dots,\ a_n$, a real number $m$ is \textit{medium} (\textit{moyenne}) among the $a_1,\ \dots,\ a_n$ if and only if
+    \[
+        \bigwedge \{a_1,\ a_2,\ \dots,\ a_n\} \leq m \leq \bigvee \{a_1,\ a_2,\ \dots,\ a_n\}.
+    \]
+\end{definition}
+
+\bigskip
+
+\begin{theorem}\label{theorem.medium}
+Let $n\in \N$. Let $(a_i)_{1\leq i \leq n}$ and $(b_i)_{1\leq i \leq n}$ be sequences of real numbers. Then,
+\[
+    \frac{\sum_{i=1}^{n} a_1}{\sum_{i=1}^{n} b_i}
+\]
+is a medium of  
+\[
+    \left\{ \frac{a_1}{b_1},\ \dots,\ \frac{a_n}{b_n} \right\}.
+\]
+\end{theorem}
+
+\begin{theorem}
+    Let $a_1,\ a_2,\ \dots,\ a_n$ be real numbers. Therefore, 
+    \[
+        \frac{\sum_{i=1}^{n}a_i}{n}
+    \]
+    is a medium of $a_1,\ a_2,\ \dots,\ a_n$ and $b_1,\ \dots,\ b_n$ where $b_i = n$ (and it is called the \textit{arithmetic medium}).
+\end{theorem}
+One proof (using \cref{theorem.medium}) is the following.
+\begin{proof}
+    Apply \cref{theorem.medium}.
+\end{proof}
+
+The following is a proof that does not rely on \cref{theorem.medium}.
+\begin{proof}
+    Let $a = \bigwedge\left\{a_1,\ \dots,\ a_n\right\}$.
+Therefore, for some $k_1,\ \dots,\ k_n$, one can rewrite the real numbers in $\left\{a_1,\ \dots,\ a_n\right\}$ as 
+\[
+    a+k_1,\ \dots,\ a+k_n.
+\]
+Therefore, 
+\[
+    a = \frac{\sum_{i=1}^{n} a}{n} \leq \frac{\sum_{i=1}^{n} a}{n} + \frac{\sum_{i=1}^{n} k_i}{n} = \frac{\sum_{i=1}^{n} a+k_1}{n}.
+\]
+
+Similarly, for $A = \bigvee \left\{a_1,\ \dots,\ a_n\right\}$, for some $k_1,\ \dots,\ k_n$, one can rewrite $\left\{a_1,\ \dots,\ a_n\right\}$ as 
+\[
+    A-k_1,\ \dots,\ A-k_n.
+\]
+Reasoning as above, one shows that 
+\[
+    \frac{\sum_{i=1}^{n} A-k_1}{n} \leq \frac{\sum_{i=1}^{n} A}{n} = A.
+\]
+\end{proof}
+
+
+
+% Bibliography (assuming you have a BibTeX file named 'references.bib')
+% \bibliographystyle{amsplain}
+% \bibliography{references}
+
+\end{document}
