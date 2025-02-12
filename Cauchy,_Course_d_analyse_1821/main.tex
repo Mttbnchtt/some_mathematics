@@ -14,6 +14,7 @@
 
 % AMS packages for enhanced math typesetting:
 \usepackage{amsmath, amssymb, amsthm}  
+\usepackage{IEEEtrantools}
 
 % For including graphics:
 \usepackage{graphicx}
@@ -149,24 +150,33 @@ One proof (using \cref{theorem.medium}) is the following.
 
 The following is a different proof of \cref{theorem.medium} that does not rely on \cref{theorem.medium}.
 \begin{proof}
-    Let $a = \bigwedge\left\{a_1,\ \dots,\ a_n\right\}$.
-Therefore, for some $k_1,\ \dots,\ k_n$, one can rewrite the real numbers in $\left\{a_1,\ \dots,\ a_n\right\}$ as 
-\[
-    a+k_1,\ \dots,\ a+k_n.
-\]
-Therefore, 
-\[
-    a = \frac{\sum_{i=1}^{n} a}{n} \leq \frac{\sum_{i=1}^{n} a}{n} + \frac{\sum_{i=1}^{n} k_i}{n} = \frac{\sum_{i=1}^{n} a+k_1}{n}.
-\]
+    Let $a = \bigwedge\left\{a_1,\ \dots,\ a_n\right\}$ and $A = \bigvee \left\{a_1,\ \dots,\ a_n\right\}$. Moreover, let $m = \frac{\sum_{i=1}^{n}a_i}{n}$. I have to show that 
+    \[
+        a \leq  m \leq A .
+    \]
+    
+    First, I prove that $a \leq m$. Since $a = \bigwedge\left\{a_1,\ \dots,\ a_n\right\}$, for some $k_1,\ \dots,\ k_n$, one can rewrite the sequence $a_1,\ \dots,\ a_n$ as 
+    \[
+        a+k_1,\ \dots,\ a+k_n.
+    \]
 
-Similarly, for $A = \bigvee \left\{a_1,\ \dots,\ a_n\right\}$, for some $k_1,\ \dots,\ k_n$, one can rewrite $\left\{a_1,\ \dots,\ a_n\right\}$ as 
-\[
-    A-k_1,\ \dots,\ A-k_n.
-\]
-Reasoning as above, one shows that 
-\[
-    \frac{\sum_{i=1}^{n} A-k_1}{n} \leq \frac{\sum_{i=1}^{n} A}{n} = A.
-\]
+    Therefore,
+    \begin{IEEEeqnarray}{rCl}
+        a   & =     & \frac{\sum_{i=1}^{n} a}{n} \nonumber \\
+            & \leq  & \frac{\sum_{i=1}^{n} a}{n} + \frac{\sum_{i=1}^{n} k_i}{n} \nonumber \\
+            & =     & \frac{\sum_{i=1}^{n} (a+k_1)}{n} \nonumber \\
+            & =     & \frac{\sum_{i=1}^{n}a_i}{n} \nonumber \\
+            & =     & m. \nonumber
+    \end{IEEEeqnarray}
+
+    Now, I show that $m\leq A$. Similarly to in the previous case, since $A = \bigvee \left\{a_1,\ \dots,\ a_n\right\}$, for some $k_1,\ \dots,\ k_n$, one can rewrite $a_1,\ \dots,\ a_n$ as 
+    \[
+        A-k_1,\ \dots,\ A-k_n.
+    \]
+    Reasoning as above, one shows that 
+    \[
+        m = \frac{\sum_{i=1}^{n}a_i}{n} = \frac{\sum_{i=1}^{n} (A-k_1)}{n} \leq \frac{\sum_{i=1}^{n} A}{n} = A.
+    \]
 \end{proof}
 When $b_i = 1$ for all $1\leq i \leq n$, I will simply say that 
 \[
