@@ -46,3 +46,21 @@ def perfect_numbers (n : Nat) : List Nat :=
 
 -- find the list of perfect numbers < 1000
 #eval perfect_numbers 1000
+
+-- exercise 3
+/--
+function that, for every list L,
+returns the list of exactly all the sublists of L
+-/
+def find_sublists {α : Type} (xs : List α) : List (List α) :=
+  match xs with
+  -- the empty list has one sublist, the empty list
+  | [] => [[]]
+
+  -- if the list is not empty,
+  -- find the sublists of the tail of the list
+  -- then concatenate the result with the result of mapping the sublists of the tail
+  -- by adding the head to each sublist
+  | y :: ys => (find_sublists ys) ++ (find_sublists ys).map (fun x => y :: x)
+
+#eval find_sublists [1, 2, 3]
