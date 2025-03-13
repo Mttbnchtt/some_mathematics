@@ -15,6 +15,8 @@ def divisors ( n : Nat) : List Nat :=
 #eval divisors 10
 #eval divisors 0
 
+
+---------------------------------------------------------------------
 -- exercise 2
 -- find perfect numbers < 1000
 
@@ -47,6 +49,8 @@ def perfect_numbers (n : Nat) : List Nat :=
 -- find the list of perfect numbers < 1000
 #eval perfect_numbers 1000
 
+
+---------------------------------------------------------------------
 -- exercise 3
 /--
 function that, for every list L,
@@ -56,7 +60,6 @@ def find_sublists {α : Type} (xs : List α) : List (List α) :=
   match xs with
   -- the empty list has one sublist, the empty list
   | [] => [[]]
-
   -- if the list is not empty,
   -- find the sublists of the tail of the list
   -- then concatenate the result with the result of mapping the sublists of the tail
@@ -64,3 +67,24 @@ def find_sublists {α : Type} (xs : List α) : List (List α) :=
   | y :: ys => (find_sublists ys) ++ (find_sublists ys).map (fun x => y :: x)
 
 #eval find_sublists [1, 2, 3]
+
+
+---------------------------------------------------------------------
+-- exercise 4
+theorem length_list_of_sublists {α : Type} (xs : List α) :
+  (find_sublists xs).length = 2^(xs.length) := by
+  induction xs with
+  | nil =>
+    simp [find_sublists]
+  | cons y ys ih =>
+    simp [find_sublists, List.length_append, List.length_map, Nat.pow_succ, ih]
+    linarith
+
+-- import Mathlib?
+-- import Mathlib.Tactic.Linarith
+
+
+#check List.length_append
+#check List.length_map
+#check Nat.pow_succ
+-- #check linarith

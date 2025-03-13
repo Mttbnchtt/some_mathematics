@@ -1,0 +1,10 @@
+name = "Avigad, Logic and mechanized reasoning_2024"
+version = "0.1.0"
+defaultTargets = ["avigad, logic and mechanized reasoning_2024"]
+
+[[lean_lib]]
+name = "«Avigad, Logic and mechanized reasoning2024»"
+
+[[lean_exe]]
+name = "avigad, logic and mechanized reasoning_2024"
+root = "Main"

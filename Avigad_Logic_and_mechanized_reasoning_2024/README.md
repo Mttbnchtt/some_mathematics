@@ -1,0 +1,1 @@
+# Avigad, Logic and mechanized reasoning_2024
