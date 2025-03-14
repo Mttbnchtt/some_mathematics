@@ -88,3 +88,20 @@ theorem length_list_of_sublists {α : Type} (xs : List α) :
 #check List.length_map
 #check Nat.pow_succ
 -- #check linarith
+
+---------------------------------------------------------------------
+-- exercise 5
+-- permutations of a list
+
+def insert_everywhere {α : Type} (x : α) : List α → List (List α)
+  | [] => [[x]]
+  | y :: ys => (x :: y :: ys) :: (insert_everywhere x ys).map (fun zs => y :: zs)
+
+#eval insert_everywhere 3 [1, 2]
+
+
+def list_permutations {α : Type} : List α → List (List α)
+  | [] => [[]]
+  | y :: ys => ((list_permutations ys).map (fun zs => insert_everywhere y zs)).flatten
+
+#eval list_permutations [1, 2, 3]
