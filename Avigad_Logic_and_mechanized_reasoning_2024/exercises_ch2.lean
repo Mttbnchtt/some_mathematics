@@ -142,8 +142,9 @@ def check_equal_length {α : Type} (xs : List (List α)) : Bool :=
 #eval check_equal_length [[1, 2], [3, 4], [5, 6, 7]]
 
 --
-def t {α : Type} (xs : List (List α)) : List (List α) :=
+def t {α : Type} (M : List (List α)) : List (List α) :=
   -- xs.filter (fun x => check_equal_length xs)
-  match xs with
-  | [[]] => [[]]
+  match M with
+  | [] => [] -- no rows → empty matrix
+  | [] :: _ => [] -- no columns → empty matrix
   | y :: ys => y :: (t ys)
