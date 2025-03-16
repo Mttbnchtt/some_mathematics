@@ -128,3 +128,8 @@ theorem t {α : Type} (xs : List α) :
   | cons y ys ih =>
     simp [list_permutations, List.length, factorial, List.length_map, List.length_flatten, ih]
     ; linarith
+
+---------------------------------------------------------------------
+-- exercise 7
+
+def check_equal_length {α : type} (xs : list)
