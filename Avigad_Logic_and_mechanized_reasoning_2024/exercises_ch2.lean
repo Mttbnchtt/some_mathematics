@@ -78,7 +78,7 @@ theorem length_list_of_sublists {α : Type} (xs : List α) :
     simp [find_sublists]
   | cons y ys ih =>
     simp [find_sublists, List.length_append, List.length_map, Nat.pow_succ, ih]
-    linarith
+    ; linarith
 
 -- import Mathlib?
 -- import Mathlib.Tactic.Linarith
@@ -105,3 +105,26 @@ def list_permutations {α : Type} : List α → List (List α)
   | y :: ys => ((list_permutations ys).map (fun zs => insert_everywhere y zs)).flatten
 
 #eval list_permutations [1, 2, 3]
+
+
+---------------------------------------------------------------------
+-- exercise 6
+
+def factorial (n : Nat) : Nat :=
+  match n with
+  | 0 => 1
+  | (n+1) => (n+1) * factorial n
+
+#eval factorial 0
+#eval factorial 1
+#eval factorial 2
+#eval factorial 3
+
+theorem t {α : Type} (xs : List α) :
+  (list_permutations xs).length = factorial xs.length := by
+  induction xs with
+  | nil =>
+    simp [list_permutations, factorial]
+  | cons y ys ih =>
+    simp [list_permutations, List.length, factorial, List.length_map, List.length_flatten, ih]
+    ; linarith
