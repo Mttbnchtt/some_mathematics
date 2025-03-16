@@ -143,4 +143,7 @@ def check_equal_length {α : Type} (xs : List (List α)) : Bool :=
 
 --
 def t {α : Type} (xs : List (List α)) : List (List α) :=
-  xs.filter (fun x => check_equal_length xs)
+  -- xs.filter (fun x => check_equal_length xs)
+  match xs with
+  | [[]] => [[]]
+  | y :: ys => y :: (t ys)
