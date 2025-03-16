@@ -132,4 +132,15 @@ theorem t {α : Type} (xs : List α) :
 ---------------------------------------------------------------------
 -- exercise 7
 
-def check_equal_length {α : type} (xs : list)
+-- check if all the sublists of a list have the same length
+def check_equal_length {α : Type} (xs : List (List α)) : Bool :=
+  match xs with
+  | [] => true
+  | y :: ys => ys.all (fun zs => y.length = zs.length)
+
+#eval check_equal_length [[1, 2], [3, 4], [5, 6]]
+#eval check_equal_length [[1, 2], [3, 4], [5, 6, 7]]
+
+--
+def t {α : Type} (xs : List (List α)) : List (List α) :=
+  xs.filter (fun x => check_equal_length xs)
