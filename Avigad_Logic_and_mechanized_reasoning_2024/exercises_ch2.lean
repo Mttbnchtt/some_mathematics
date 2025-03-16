@@ -142,9 +142,15 @@ def check_equal_length {α : Type} (xs : List (List α)) : Bool :=
 #eval check_equal_length [[1, 2], [3, 4], [5, 6, 7]]
 
 --
-def t {α : Type} (M : List (List α)) : List (List α) :=
-  -- xs.filter (fun x => check_equal_length xs)
+def transpose {α : Type} (M : List (List α)) : List (List α) :=
   match M with
-  | [] => [] -- no rows → empty matrix
-  | [] :: _ => [] -- no columns → empty matrix
-  | y :: ys => y :: (t ys)
+  | []         => [] -- no rows → empty matrix
+  | [] :: _    => [] -- first row is empty → no columns → empty matrix
+  | _          =>
+    let heads := M.map (fun row => row.head!)
+    let tails := M.map (fun row => row.tail!)
+    heads :: transpose tails
+-- termination_by
+--   List.foldl (fun acc row => acc + row.length) 0 M
+
+#eval transpose [[1, 2], [3, 4], [5, 6]]
